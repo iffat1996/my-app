@@ -1,25 +1,55 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends React.Component {
+  state = {
+    number: ''
+  }
+
+  handleChange = (e) => {
+    this.setState({
+      number: e.target.value
+    })
+  }
+
+  createTable = (e) => {
+    let table = []
+
+    let children = []
+    
+    for (let j = 1; j <= this.state.number; j++) {
+      let k = 1200*j
+      console.log(k)
+      children.push(<td style={{
+        backgroundColor: 'blue',
+        width: 1000+k,
+        alignSelf: 'center',
+        height: 20
+      }}></td>)
+      
+    }
+
+    table.push(<tr>{children}</tr>)
+ 
+    return table
+  }
+
+  render() {
+    return (
+
+      <div className="app-content">
+        <form>
+          <input type="number" onChange={this.handleChange} />
+        </form>
+
+        <table>
+          <tbody>
+            {this.createTable()}
+          </tbody>
+        </table>
+      </div>
+
+    )
+  }
+
+
 }
-
-export default App;
